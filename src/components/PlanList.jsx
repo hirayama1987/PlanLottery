@@ -1,48 +1,48 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-export default function Memolist() {
+export default function Planlist() {
   return (
     <View>
-      <View style={styles.memoListItem}>
+      <View style={styles.planListItem}>
         <View>
-          <Text style={styles.memoListItemTitle}>買い物リスト</Text>
+          <Text style={styles.planListItemTitle}>買い物リスト</Text>
           <Text>2020年</Text>
         </View>
-        <View>
+        <TouchableOpacity>
           <Text>
             X
           </Text>
-        </View>
+        </TouchableOpacity>
       </View>
-      <View style={styles.memoListItem}>
+      <View style={styles.planListItem}>
         <View>
-          <Text style={styles.memoListItemTitle}>買い物リスト</Text>
+          <Text style={styles.planListItemTitle}>買い物リスト</Text>
           <Text>2020年</Text>
         </View>
-        <View>
+        <TouchableOpacity>
           <Text>
             X
           </Text>
-        </View>
+        </TouchableOpacity>
       </View>
-      <View style={styles.memoListItem}>
+      <View style={styles.planListItem}>
         <View>
-          <Text style={styles.memoListItemTitle}>買い物リスト</Text>
+          <Text style={styles.planListItemTitle}>買い物リスト</Text>
           <Text>2020年</Text>
         </View>
-        <View>
+        <TouchableOpacity>
           <Text>
             X
           </Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  memoListItem: {
+  planListItem: {
     backgroundColor: '#fff',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: '#ccc'
   },
-  memoListItemTitle: {
+  planListItemTitle: {
     fontSize: 16,
     lineHeight: 32,
   },
