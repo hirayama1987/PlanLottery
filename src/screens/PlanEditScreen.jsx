@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, TextInput, ScrollView, KeyboardAvoidingView } from 'react-native';
 import CircleButton from "../components/CircleButton";
 
-export default function PlanCreateScreen(props) {
+export default function PlanEditScreen(props) {
   const {navigation} = props;
   return (
     <KeyboardAvoidingView style={styles.container} behavior="height">
@@ -11,7 +11,7 @@ export default function PlanCreateScreen(props) {
       </ScrollView>
       <CircleButton
         style={{ bottom: 80 }}
-        name="plus"
+        name="check"
         onPress={() => {navigation.goBack(); }}
       ></CircleButton>
     </KeyboardAvoidingView>

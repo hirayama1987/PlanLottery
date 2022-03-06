@@ -3,7 +3,8 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 import CircleButton from "../components/CircleButton";
 
-export default function PlanDetailScreen() {
+export default function PlanDetailScreen(props) {
+  const {navigation} = props;
   return (
     <View style={styles.container}>
       <View style={styles.planHeader}>
@@ -12,7 +13,11 @@ export default function PlanDetailScreen() {
       <ScrollView style={styles.planDetail}>
         <Text>プランの詳細</Text>
       </ScrollView>
-      <CircleButton style={{ top: 112 }} name="edit-3"></CircleButton>
+      <CircleButton
+        style={{ top: 112 }}
+        name="edit-3"
+        onPress={() => {navigation.navigate('PlanEdit')}}
+      ></CircleButton>
     </View>
   );
 }

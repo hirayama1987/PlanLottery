@@ -1,42 +1,62 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Planlist() {
+  const navigation = useNavigation();
   return (
     <View>
-      <View style={styles.planListItem}>
+      <TouchableOpacity
+        style={styles.planListItem}
+        onPress={() => {navigation.navigate('PlanDetail')}}
+      >
         <View>
           <Text style={styles.planListItemTitle}>買い物リスト</Text>
           <Text>2020年</Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => { Alert.alert('Are you sure?')}}
+        >
           <Text>
             X
           </Text>
         </TouchableOpacity>
-      </View>
-      <View style={styles.planListItem}>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.planListItem}
+        onPress={() => {navigation.navigate('PlanDetail')}}
+      >
         <View>
           <Text style={styles.planListItemTitle}>買い物リスト</Text>
           <Text>2020年</Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => { Alert.alert('Are you sure?')}}
+        >
           <Text>
             X
           </Text>
         </TouchableOpacity>
-      </View>
-      <View style={styles.planListItem}>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.planListItem}
+        onPress={() => {navigation.navigate('PlanDetail')}}
+      >
         <View>
           <Text style={styles.planListItemTitle}>買い物リスト</Text>
           <Text>2020年</Text>
         </View>
-        <TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => { Alert.alert('Are you sure?')}}
+        >
           <Text>
             X
           </Text>
         </TouchableOpacity>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 }

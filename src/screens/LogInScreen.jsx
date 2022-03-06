@@ -3,7 +3,9 @@ import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-nativ
 
 import Button from "../components/Button";
 
-export default function LogInScreen() {
+export default function LogInScreen(props) {
+
+  const {navigation} = props;
   return (
     <View style={styles.container}>
       <View style={styles.inner}>
@@ -12,10 +14,25 @@ export default function LogInScreen() {
         </Text>
         <TextInput value="Email" style={styles.input} />
         <TextInput value="Password" style={styles.input} />
-        <Button label="submit" />
+        <Button
+          label="submit"
+          onPress={() => {
+            navigation.reset({
+              index: 0,
+              routes:[{ name: 'PlanList'}],
+            });
+          }}
+        />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Not registered?</Text>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.reset({
+                index: 0,
+                routes:[{ name: 'SignUp'}],
+              });
+            }}
+          >
             <Text style={styles.footerLink}>Sign Up Here</Text>
           </TouchableOpacity>
         </View>

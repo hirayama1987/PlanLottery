@@ -4,11 +4,15 @@ import { StyleSheet, Text, View } from 'react-native';
 import PlanList from "../components/PlanList";
 import CircleButton from "../components/CircleButton";
 
-export default function PlanListScreen() {
+export default function PlanListScreen(props) {
+  const {navigation} = props;
   return (
     <View style={styles.container}>
       <PlanList></PlanList>
-      <CircleButton name="plus" />
+      <CircleButton
+        name="plus"
+        onPress={() => {navigation.navigate('PlanCreate')}}
+      />
     </View>
   );
 }
