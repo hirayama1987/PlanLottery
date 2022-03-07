@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 import CircleButton from "../components/CircleButton";
+import firebase from 'firebase'
 
 export default function AppPlanScreen() {
   return (

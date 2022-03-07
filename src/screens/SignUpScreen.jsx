@@ -1,27 +1,59 @@
-import React from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import firebase from 'firebase'
 
 import Button from "../components/Button";
 
 export default function SignUpScreen(props) {
 
   const {navigation} = props;
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  function handlePress(){
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(
+        (userCredential) => {
+          const {user} = userCredential;
+          console.log(user.uid)
+          navigation.reset({
+            index: 0,
+            routes:[{ name: 'PlanList'}],
+          });
+        })
+      .catch((error) => {
+        console.log(error);
+        Alert.alert(error.code);
+      })
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.inner}>
         <Text style={styles.title}>
           Sign Up
         </Text>
-        <TextInput value="Email" style={styles.input} />
-        <TextInput value="Password" style={styles.input} />
+        <TextInput
+          value={ email }
+          onChangeText={(text) => {setEmail(text);}}
+          style={styles.input}
+          autoCapitalize="none"
+          keyboardType="email-address"
+          placeholder="Email address"
+          textContentType="emailAddress"
+        />
+        <TextInput
+          value={ password }
+          onChangeText={(text) => {setPassword(text);}}
+          style={styles.input}
+          autoCapitalize="none"
+          placeholder="Password"
+          secureTextEntry
+          textContentType="password"
+        />
         <Button
           label="submit"
-          onPress={() => {
-            navigation.reset({
-              index: 0,
-              routes:[{ name: 'PlanList'}],
-            });
-          }}
+          onPress={handlePress}
         />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Already registered?</Text>

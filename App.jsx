@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import {CardStyleInterpolators, createStackNavigator} from '@react-navigation/stack';
+import firebase from 'firebase'
 
 import PlanDetailScreen from "./src/screens/PlanDetailScreen";
 import PlanListScreen from "./src/screens/PlanListScreen";
@@ -10,6 +11,12 @@ import LogInScreen from "./src/screens/LogInScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
 import PlanEditScreen from "./src/screens/PlanEditScreen";
 
+import { firebaseConfig } from "./env";
+require('firebase/firestore');
+
+if(firebase.apps.length === 0){
+  firebase.initializeApp(firebaseConfig);
+}
 
 const Stack = createStackNavigator();
 
@@ -17,7 +24,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="SignUp"
+        initialRouteName="LogIn"
         screenOptions={{
           headerStyle:{ backgroundColor: '#FF8D41'},
           headerTitleStyle:{ color: '#FFF'},

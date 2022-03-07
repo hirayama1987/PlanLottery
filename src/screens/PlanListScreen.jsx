@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import PlanList from "../components/PlanList";
 import CircleButton from "../components/CircleButton";
+import LogOutButton from "../components/LogOutButton";
 
 export default function PlanListScreen(props) {
   const {navigation} = props;
+  useEffect(() =>{
+    navigation.setOptions(
+      {
+        headerRight: () => <LogOutButton/>,
+      }
+    );
+  }, []);
   return (
     <View style={styles.container}>
       <PlanList></PlanList>

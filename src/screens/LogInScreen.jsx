@@ -1,27 +1,71 @@
-import React from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {StyleSheet, View, Text, TextInput, TouchableOpacity, Alert} from 'react-native';
 
 import Button from "../components/Button";
+import firebase from "firebase";
 
 export default function LogInScreen(props) {
 
   const {navigation} = props;
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      if (user){
+        navigation.reset({
+          index: 0,
+          routes:[{ name: 'PlanList'}],
+        });
+      }
+    })
+    return unsubscribe;
+  }, []);
+
+  function handlePress(){
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(
+        (userCredential) => {
+          const {user} = userCredential;
+          console.log(user.uid)
+          navigation.reset({
+            index: 0,
+            routes:[{ name: 'PlanList'}],
+          });
+        })
+      .catch((error) => {
+        console.log(error);
+        Alert.alert(error.code);
+      });
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.inner}>
         <Text style={styles.title}>
           Log In
         </Text>
-        <TextInput value="Email" style={styles.input} />
-        <TextInput value="Password" style={styles.input} />
+        <TextInput
+          value={ email }
+          onChangeText={(text) => {setEmail(text);}}
+          style={styles.input}
+          autoCapitalize="none"
+          keyboardType="email-address"
+          placeholder="Email address"
+          textContentType="emailAddress"
+        />
+        <TextInput
+          value={ password }
+          onChangeText={(text) => {setPassword(text);}}
+          style={styles.input}
+          autoCapitalize="none"
+          placeholder="Password"
+          secureTextEntry
+          textContentType="password"
+        />
         <Button
           label="submit"
-          onPress={() => {
-            navigation.reset({
-              index: 0,
-              routes:[{ name: 'PlanList'}],
-            });
-          }}
+          onPress={handlePress}
         />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Not registered?</Text>
