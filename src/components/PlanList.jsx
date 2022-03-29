@@ -1,65 +1,52 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { shape, string, instanceOf, arrayOf } from 'prop-types';
 
-export default function Planlist() {
+export default function Planlist(props) {
+  const { plans } = props;
   const navigation = useNavigation();
+
+  function renderItem({item}){
+    return (
+      <TouchableOpacity
+        style={styles.planListItem}
+        onPress={() => {navigation.navigate('PlanDetail')}}
+        key={item.id}
+      >
+        <View>
+          <Text style={styles.planListItemTitle}>{item.bodyText}</Text>
+          <Text>{String(item.updatedAt)}</Text>
+        </View>
+        <TouchableOpacity
+          onPress={() => { Alert.alert('Are you sure?')}}
+        >
+          <Text>
+            X
+          </Text>
+        </TouchableOpacity>
+      </TouchableOpacity>
+    )
+  }
+
   return (
-    <View>
-      <TouchableOpacity
-        style={styles.planListItem}
-        onPress={() => {navigation.navigate('PlanDetail')}}
-      >
-        <View>
-          <Text style={styles.planListItemTitle}>買い物リスト</Text>
-          <Text>2020年</Text>
-        </View>
-        <TouchableOpacity
-          onPress={() => { Alert.alert('Are you sure?')}}
-        >
-          <Text>
-            X
-          </Text>
-        </TouchableOpacity>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.planListItem}
-        onPress={() => {navigation.navigate('PlanDetail')}}
-      >
-        <View>
-          <Text style={styles.planListItemTitle}>買い物リスト</Text>
-          <Text>2020年</Text>
-        </View>
-        <TouchableOpacity
-          onPress={() => { Alert.alert('Are you sure?')}}
-        >
-          <Text>
-            X
-          </Text>
-        </TouchableOpacity>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.planListItem}
-        onPress={() => {navigation.navigate('PlanDetail')}}
-      >
-        <View>
-          <Text style={styles.planListItemTitle}>買い物リスト</Text>
-          <Text>2020年</Text>
-        </View>
-
-        <TouchableOpacity
-          onPress={() => { Alert.alert('Are you sure?')}}
-        >
-          <Text>
-            X
-          </Text>
-        </TouchableOpacity>
-      </TouchableOpacity>
-    </View>
+    <ScrollView>
+      <FlatList
+        data={plans}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+      />
+    </ScrollView>
   );
 }
+
+Planlist.propTypes = {
+  plans: arrayOf(shape({
+    id:string,
+    bobyText:string,
+    updatedAt:instanceOf(Date),
+  })).isRequired,
+};
 
 const styles = StyleSheet.create({
   planListItem: {

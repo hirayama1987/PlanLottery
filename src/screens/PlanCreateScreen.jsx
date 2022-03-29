@@ -33,7 +33,7 @@ export default function PlanCreateScreen(props) {
       .catch((error) => {
         console.log('error', error);
       })
-    // navigation.goBack();
+    navigation.goBack();
   }
 
   return (
