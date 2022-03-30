@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Alert, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { shape, string, instanceOf, arrayOf } from 'prop-types';
+import {dateToString} from "../utils";
 
 export default function Planlist(props) {
   const { plans } = props;
@@ -11,12 +12,12 @@ export default function Planlist(props) {
     return (
       <TouchableOpacity
         style={styles.planListItem}
-        onPress={() => {navigation.navigate('PlanDetail')}}
+        onPress={() => {navigation.navigate('PlanDetail', { id: item.id });}}
         key={item.id}
       >
         <View>
           <Text style={styles.planListItemTitle}>{item.bodyText}</Text>
-          <Text>{String(item.updatedAt)}</Text>
+          <Text>{dateToString(item.updatedAt)}</Text>
         </View>
         <TouchableOpacity
           onPress={() => { Alert.alert('Are you sure?')}}
@@ -30,13 +31,13 @@ export default function Planlist(props) {
   }
 
   return (
-    <ScrollView>
+    <View>
       <FlatList
         data={plans}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />
-    </ScrollView>
+    </View>
   );
 }
 
