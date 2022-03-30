@@ -45,7 +45,7 @@ export default function PlanDetailScreen(props) {
       <CircleButton
         style={{ top: 112 }}
         name="edit-3"
-        onPress={() => {navigation.navigate('PlanEdit')}}
+        onPress={() => {navigation.navigate('PlanEdit',{id: plan.id, bodyText: plan.bodyText});}}
       ></CircleButton>
     </View>
   );
